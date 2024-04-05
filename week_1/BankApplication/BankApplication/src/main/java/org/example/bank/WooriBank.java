@@ -1,4 +1,4 @@
-package org.example.Bank;
+package org.example.bank;
 
 public class WooriBank extends Bank {
     private static final double INTEREST_RATE = 3.2;
