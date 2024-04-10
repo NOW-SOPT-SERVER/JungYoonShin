@@ -1,4 +1,4 @@
-package org.example.bank;
+package org.example.model.bank;
 
 public enum BankType {
     WOORIBANK("우리은행");
