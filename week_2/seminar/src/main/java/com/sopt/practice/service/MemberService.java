@@ -41,7 +41,8 @@ public class MemberService {
     }
 
     public MemberListDto getMemberList() {
-        List<MemberFindDto> memberDetailDtos = memberRepository.findAll().stream()
+        List<MemberFindDto> memberDetailDtos = null;
+        memberDetailDtos = memberRepository.findAll().stream()
                 .map(MemberFindDto::of)
                 .toList();
 
