@@ -3,6 +3,7 @@ package com.sopt.practice.controller;
 import com.sopt.practice.service.MemberService;
 import com.sopt.practice.service.dto.MemberCreateDto;
 import com.sopt.practice.service.dto.MemberFindDto;
+import com.sopt.practice.service.dto.MemberListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,12 @@ public class MemberController {
     public ResponseEntity deleteMemberById(@PathVariable("memberId") Long memberId) {
         memberService.deleteMemberById(memberId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("")
+    public ResponseEntity<MemberListDto> getMemberList() {
+        memberService.getMemberList();
+        return ResponseEntity.ok(memberService.getMemberList());
     }
 
 }

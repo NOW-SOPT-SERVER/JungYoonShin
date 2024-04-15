@@ -4,10 +4,14 @@ import com.sopt.practice.domain.Member;
 import com.sopt.practice.repository.MemberRepository;
 import com.sopt.practice.service.dto.MemberCreateDto;
 import com.sopt.practice.service.dto.MemberFindDto;
+import com.sopt.practice.service.dto.MemberListDto;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,5 +38,13 @@ public class MemberService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(()-> new EntityNotFoundException("ID에 해당하는 사용자가 존재하지 않습니다."));
         memberRepository.delete(member);
+    }
+
+    public MemberListDto getMemberList() {
+        List<MemberFindDto> memberDetailDtos = memberRepository.findAll().stream()
+                .map(MemberFindDto::of)
+                .toList();
+
+        return MemberListDto.of(memberDetailDtos);
     }
 }
