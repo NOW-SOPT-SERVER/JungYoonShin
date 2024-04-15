@@ -42,7 +42,7 @@ public class MemberServiceTest {
         MemberListDto memberListDto = memberService.getMemberList();
 
         // then
-        Assertions.assertThat(memberListDto.memberDetail().size()).isEqualTo(2);
+        Assertions.assertThat(memberListDto.memberDetail().size()).isEqualTo(3);
     }
 
 }
