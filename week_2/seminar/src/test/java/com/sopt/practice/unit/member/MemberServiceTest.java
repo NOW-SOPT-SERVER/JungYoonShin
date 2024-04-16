@@ -4,7 +4,7 @@ import com.sopt.practice.domain.Member;
 import com.sopt.practice.domain.Part;
 import com.sopt.practice.repository.MemberRepository;
 import com.sopt.practice.service.MemberService;
-import com.sopt.practice.service.dto.MemberListDto;
+import com.sopt.practice.service.dto.MemberListResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ public class MemberServiceTest {
         given(memberRepository.findAll()).willReturn(memberList);
 
         // when
-        MemberListDto memberListDto = memberService.getMemberList();
+        MemberListResponse memberListDto = memberService.getMemberList();
 
         // then
         Assertions.assertThat(memberListDto.memberDetail().size()).isEqualTo(3);

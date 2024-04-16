@@ -2,16 +2,15 @@ package com.sopt.practice.service;
 
 import com.sopt.practice.domain.Member;
 import com.sopt.practice.repository.MemberRepository;
-import com.sopt.practice.service.dto.MemberCreateDto;
-import com.sopt.practice.service.dto.MemberFindDto;
-import com.sopt.practice.service.dto.MemberListDto;
+import com.sopt.practice.service.dto.MemberCreateResponse;
+import com.sopt.practice.service.dto.MemberDetailResponse;
+import com.sopt.practice.service.dto.MemberListResponse;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,15 +19,15 @@ public class MemberService {
 
     @Transactional   //DB 반영을 위한 어노테이션(수정사항 등 발생시)
     public String createMember(
-            final MemberCreateDto memberCreateDto  //인자로 들어오는 값의 불변성?을 보장하기 위해 final을 붙임
+            final MemberCreateResponse memberCreateDto  //인자로 들어오는 값의 불변성?을 보장하기 위해 final을 붙임
     ) {
         Member member = Member.create(memberCreateDto.name(), memberCreateDto.part(), memberCreateDto.age());
         memberRepository.save(member);
         return member.getId().toString();
     }
 
-    public MemberFindDto findMemberById(Long memberId) {
-        return MemberFindDto.of(memberRepository.findById(memberId).orElseThrow(
+    public MemberDetailResponse findMemberById(Long memberId) {
+        return MemberDetailResponse.of(memberRepository.findById(memberId).orElseThrow(
                 () -> new EntityNotFoundException("ID에 해당하는 사용자가 존재하지 않습니다.")
         ));
     }
@@ -40,12 +39,12 @@ public class MemberService {
         memberRepository.delete(member);
     }
 
-    public MemberListDto getMemberList() {
-        List<MemberFindDto> memberDetailDtos = null;
+    public MemberListResponse getMemberList() {
+        List<MemberDetailResponse> memberDetailDtos = null;
         memberDetailDtos = memberRepository.findAll().stream()
-                .map(MemberFindDto::of)
+                .map(MemberDetailResponse::of)
                 .toList();
 
-        return MemberListDto.of(memberDetailDtos);
+        return MemberListResponse.of(memberDetailDtos);
     }
 }

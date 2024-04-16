@@ -4,8 +4,8 @@ import com.sopt.practice.controller.MemberController;
 import com.sopt.practice.domain.Member;
 import com.sopt.practice.domain.Part;
 import com.sopt.practice.service.MemberService;
-import com.sopt.practice.service.dto.MemberFindDto;
-import com.sopt.practice.service.dto.MemberListDto;
+import com.sopt.practice.service.dto.MemberDetailResponse;
+import com.sopt.practice.service.dto.MemberListResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +40,8 @@ public class MemberControllerTest {
         Member memberA = Member.create("신정윤", Part.SERVER, 24);
         Member memberB = Member.create("아무개", Part.SERVER, 22);
 
-        MemberFindDto memberFindDto = MemberFindDto.of(memberA);
-        MemberListDto memberListDto = MemberListDto.of(List.of(memberFindDto));
+        MemberDetailResponse memberFindDto = MemberDetailResponse.of(memberA);
+        MemberListResponse memberListDto = MemberListResponse.of(List.of(memberFindDto));
 
         given(memberService.getMemberList()).willReturn(memberListDto);
 
