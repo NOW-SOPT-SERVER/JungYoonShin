@@ -1,10 +1,11 @@
 package com.sopt.practice.service.dto;
 
-import com.sopt.practice.domain.Part;
+import com.sopt.practice.domain.Member;
 
 public record MemberCreateResponse(
-        String name,
-        Part part,
-        int age
+        Long id
 ) {
+    public static MemberCreateResponse of(Member member) {
+        return new MemberCreateResponse(member.getId());
+    }
 }

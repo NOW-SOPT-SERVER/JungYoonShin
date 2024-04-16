@@ -3,7 +3,7 @@ package com.sopt.practice.controller;
 import com.sopt.practice.domain.Part;
 import com.sopt.practice.repository.MemberRepository;
 import com.sopt.practice.service.MemberService;
-import com.sopt.practice.service.dto.MemberCreateResponse;
+import com.sopt.practice.service.dto.MemberCreateRequest;
 import com.sopt.practice.settings.ApiTest;
 import io.restassured.RestAssured;
 import org.assertj.core.api.Assertions;
@@ -30,7 +30,7 @@ public class MemberControllerTest extends ApiTest {
         @DisplayName("요청 성공 테스트")
         public void createMemberSuccess() throws Exception {
             //given
-            final var request = new MemberCreateResponse(
+            final var request = new MemberCreateRequest(
                     "신정윤",
                     Part.SERVER,
                     24
