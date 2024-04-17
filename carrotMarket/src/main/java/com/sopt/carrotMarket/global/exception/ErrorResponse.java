@@ -53,7 +53,6 @@ public class ErrorResponse {
                     .map(ValidationError::new)
                     .toList();
         }
-
     }
 
 }
