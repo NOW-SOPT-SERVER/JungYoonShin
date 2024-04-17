@@ -37,7 +37,7 @@ public class Item extends BaseTimeEntity {
     private String title;
 
     @Column(columnDefinition = "longtext", nullable = false)
-    private String content;
+    private String description;
 
     @Enumerated(STRING)
     @Column(nullable = false)
@@ -49,6 +49,20 @@ public class Item extends BaseTimeEntity {
     private DesireAddress desireAddress;
 
     private long view;
+
+    public static Item create(
+            final User user,
+            final String title,
+            final String description,
+            final ItemCategory itemCategory
+    ) {
+        return Item.builder()
+                .user(user)
+                .title(title)
+                .description(description)
+                .category(itemCategory)
+                .build();
+    }
 }
 
 

@@ -8,22 +8,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/item/post")
+@RequestMapping("/api/items")
 @Slf4j
 
 public class ItemController {
     private final ItemService itemService;
 
     @PostMapping
-    public CommonResponse createPost(@Validated @RequestBody ItemPostRequest itemPostRequest) {
-        itemService.createPost(itemPostRequest);
-        return ApiUtils.success(200, HttpStatus.OK, itemPostRequest);
+    public CommonResponse createPost(@Validated @RequestBody ItemPostRequest itemPostRequest, @RequestParam(value = "memberId", required = false) Long memberId) {
+        itemService.createPost(itemPostRequest, memberId);
+        return ApiUtils.success(200, HttpStatus.OK);
     }
 }

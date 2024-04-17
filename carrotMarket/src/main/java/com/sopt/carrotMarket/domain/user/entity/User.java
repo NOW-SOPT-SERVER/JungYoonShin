@@ -44,4 +44,18 @@ public class User extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
+    public static User create(
+            final String nickname,
+            final String email,
+            final String password,
+            final String phoneNumber
+    ) {
+        return User.builder()
+                .nickname(nickname)
+                .email(email)
+                .password(password)
+                .phoneNumber(phoneNumber)
+                .build();
+    }
 }

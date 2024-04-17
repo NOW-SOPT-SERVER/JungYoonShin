@@ -1,18 +1,59 @@
 package com.sopt.carrotMarket.global.exception;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
+@Builder
 public class ErrorResponse {
 
-    private final int errorCode;
-    private final String errorMessage;
+    private final HttpStatus httpStatus;
+    private final int code;
+    private final String message;
 
-    public ErrorResponse(CustomException e) {
-        this.errorCode = e.getErrorCode().getErrorCode();
-        this.errorMessage = e.getErrorMessage();
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private final List<ValidationError> errors;
+
+    public static ErrorResponse of(HttpStatus httpStatus, int code, String message){
+        return ErrorResponse.builder()
+                .httpStatus(httpStatus)
+                .code(code)
+                .message(message)
+                .build();
+    }
+    public static ErrorResponse of(HttpStatus httpStatus,int code, String message, BindingResult bindingResult){
+        return ErrorResponse.builder()
+                .httpStatus(httpStatus)
+                .code(code)
+                .message(message)
+                .errors(ValidationError.of(bindingResult))
+                .build();
+    }
+
+    @Getter
+    public static class ValidationError {
+        private final String field;
+        private final String message;
+
+        private ValidationError(FieldError fieldError){
+            this.field = fieldError.getField();
+            this.message = fieldError.getDefaultMessage();
+        }
+
+        public static List<ValidationError> of(final BindingResult bindingResult){
+            return bindingResult.getFieldErrors().stream()
+                    .map(ValidationError::new)
+                    .toList();
+        }
+
     }
 
 }
