@@ -15,7 +15,7 @@ public enum SuccessMessage {
     MEMBER_FIND_SUCCESS(HttpStatus.OK.value(), "멤버 조회가 완료되었습니다"),
     MEMBER_DELETE_SUCCESS(HttpStatus.OK.value(), "멤버 삭제가 완료되었습니다."),
 
-    POST_CREATE_SUCCESS(HttpStatus.OK.value(), "블로그 글 작성이 완료되었습니다."),
+    POST_CREATE_SUCCESS(HttpStatus.CREATED.value(), "블로그 글 작성이 완료되었습니다."),
     SINGLE_POST_FIND_SUCCESS(HttpStatus.OK.value(), "하나의 블로그 글 조회가 완료되었습니다.");
 
 
