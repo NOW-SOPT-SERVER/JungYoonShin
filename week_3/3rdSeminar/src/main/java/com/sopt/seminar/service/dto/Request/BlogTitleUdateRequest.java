@@ -1,4 +1,4 @@
-package com.sopt.seminar.service.dto;
+package com.sopt.seminar.service.dto.Request;
 
 import jakarta.validation.constraints.Size;
 

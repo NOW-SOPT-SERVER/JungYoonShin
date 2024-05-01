@@ -3,14 +3,11 @@ package com.sopt.seminar.controller;
 import com.sopt.seminar.common.dto.SuccessMessage;
 import com.sopt.seminar.common.dto.SuccessStatusResponse;
 import com.sopt.seminar.service.MemberService;
-import com.sopt.seminar.service.dto.MemberCreateRequest;
-import com.sopt.seminar.service.dto.MemberDetailResponse;
+import com.sopt.seminar.service.dto.Request.MemberCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor

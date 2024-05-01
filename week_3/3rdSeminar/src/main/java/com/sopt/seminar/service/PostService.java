@@ -2,26 +2,22 @@ package com.sopt.seminar.service;
 
 import com.sopt.seminar.common.dto.ErrorCode;
 import com.sopt.seminar.domain.Blog;
-import com.sopt.seminar.domain.Member;
 import com.sopt.seminar.domain.Post;
 import com.sopt.seminar.exception.CustomException;
 import com.sopt.seminar.exception.NotFoundException;
 import com.sopt.seminar.repository.BlogRepository;
-import com.sopt.seminar.repository.MemberRepository;
 import com.sopt.seminar.repository.PostRepository;
-import com.sopt.seminar.service.dto.PostCreateRequest;
-import jakarta.transaction.Transactional;
+import com.sopt.seminar.service.dto.Response.PostDetailResponse;
+import com.sopt.seminar.service.dto.Request.PostCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
-    private final MemberRepository memberRepository;
     private final BlogRepository blogRepository;
 
     @Transactional
@@ -38,7 +34,18 @@ public class PostService {
             throw new CustomException(ErrorCode.NOT_BLOG_OWNER);
         }
 
-        Post.createPost(postCreateRequest, blog);
+        postRepository.save(Post.createPost(postCreateRequest, blog));
+    }
+
+    @Transactional(readOnly = true)
+    public PostDetailResponse getSinglePost(final Long postId) {
+        return PostDetailResponse.of(findPostById(postId));
+    }
+
+    public Post findPostById(Long postId) {
+        return postRepository.findById(postId).orElseThrow(
+                ()-> new NotFoundException(ErrorCode.POST_NOT_FOUND)
+        );
     }
 
     

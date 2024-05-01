@@ -6,7 +6,7 @@ import com.sopt.seminar.repository.BlogRepository;
 import com.sopt.seminar.repository.MemberRepository;
 import com.sopt.seminar.service.BlogService;
 import com.sopt.seminar.service.MemberService;
-import com.sopt.seminar.service.dto.BlogCreateRequest;
+import com.sopt.seminar.service.dto.Request.BlogCreateRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

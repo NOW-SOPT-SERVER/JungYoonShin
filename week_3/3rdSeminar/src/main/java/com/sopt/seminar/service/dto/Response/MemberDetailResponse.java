@@ -1,4 +1,4 @@
-package com.sopt.seminar.service.dto;
+package com.sopt.seminar.service.dto.Response;
 
 import com.sopt.seminar.domain.Member;
 import com.sopt.seminar.domain.Part;

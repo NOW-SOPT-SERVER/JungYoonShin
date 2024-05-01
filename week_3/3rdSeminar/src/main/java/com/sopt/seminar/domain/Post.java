@@ -1,6 +1,6 @@
 package com.sopt.seminar.domain;
 
-import com.sopt.seminar.service.dto.PostCreateRequest;
+import com.sopt.seminar.service.dto.Request.PostCreateRequest;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

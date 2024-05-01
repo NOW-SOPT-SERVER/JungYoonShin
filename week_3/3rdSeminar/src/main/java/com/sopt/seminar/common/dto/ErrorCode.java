@@ -14,6 +14,8 @@ public enum ErrorCode {
     BLOG_NOT_FOUND(HttpStatus.NO_CONTENT.value(), 2001, "ID에 해당하는 블로그가 존재하지 않습니다."),
     NOT_BLOG_OWNER(HttpStatus.BAD_REQUEST.value(), 2002, "해당 블로그의 소유자가 아니므로 작성 권한이 없습니다."),
 
+    POST_NOT_FOUND(HttpStatus.BAD_REQUEST.value(), 3001, "ID에 해당하는 작성된 글이 존재하지 않습니다."),
+
     INVALID_VALUE(HttpStatus.BAD_REQUEST.value(), 9001, "잘못된 입력값입니다.");
 
     private final int httpStatus;
