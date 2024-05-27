@@ -1,4 +1,4 @@
-package com.sopt.seminar.common.jwt;
+package com.sopt.seminar.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

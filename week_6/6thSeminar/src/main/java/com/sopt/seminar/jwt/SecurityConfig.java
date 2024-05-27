@@ -1,8 +1,8 @@
-package com.sopt.seminar.common.jwt;
+package com.sopt.seminar.jwt;
 
-import com.sopt.seminar.common.jwt.filter.CustomAccessDeniedHandler;
-import com.sopt.seminar.common.jwt.filter.CustomJwtAuthenticationEntryPoint;
-import com.sopt.seminar.common.jwt.filter.JwtAuthenticationFilter;
+import com.sopt.seminar.jwt.filter.CustomAccessDeniedHandler;
+import com.sopt.seminar.jwt.filter.CustomJwtAuthenticationEntryPoint;
+import com.sopt.seminar.jwt.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

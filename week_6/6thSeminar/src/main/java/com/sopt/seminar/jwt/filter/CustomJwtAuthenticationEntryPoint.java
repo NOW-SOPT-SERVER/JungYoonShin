@@ -1,4 +1,4 @@
-package com.sopt.seminar.common.jwt.filter;
+package com.sopt.seminar.jwt.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sopt.seminar.common.dto.ErrorMessage;

@@ -1,8 +1,8 @@
 package com.sopt.seminar.service;
 
 import com.sopt.seminar.common.dto.ErrorMessage;
-import com.sopt.seminar.common.jwt.JwtTokenProvider;
-import com.sopt.seminar.common.jwt.UserAuthentication;
+import com.sopt.seminar.jwt.JwtTokenProvider;
+import com.sopt.seminar.jwt.UserAuthentication;
 import com.sopt.seminar.service.dto.UserJoinResponse;
 import com.sopt.seminar.domain.Member;
 import com.sopt.seminar.exception.NotFoundException;

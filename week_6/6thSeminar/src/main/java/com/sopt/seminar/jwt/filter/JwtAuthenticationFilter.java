@@ -1,8 +1,8 @@
-package com.sopt.seminar.common.jwt.filter;
+package com.sopt.seminar.jwt.filter;
 
 import com.sopt.seminar.common.dto.ErrorMessage;
-import com.sopt.seminar.common.jwt.JwtTokenProvider;
-import com.sopt.seminar.common.jwt.UserAuthentication;
+import com.sopt.seminar.jwt.JwtTokenProvider;
+import com.sopt.seminar.jwt.UserAuthentication;
 import com.sopt.seminar.exception.UnauthorizedException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-import static com.sopt.seminar.common.jwt.JwtValidationType.VALID_JWT;
+import static com.sopt.seminar.jwt.JwtValidationType.VALID_JWT;
 
 @Component
 @RequiredArgsConstructor

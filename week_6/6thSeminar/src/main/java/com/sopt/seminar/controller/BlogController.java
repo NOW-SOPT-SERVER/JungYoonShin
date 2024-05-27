@@ -1,15 +1,12 @@
 package com.sopt.seminar.controller;
 
 
-import com.sopt.seminar.common.dto.SuccessMessage;
-import com.sopt.seminar.common.dto.SuccessStatusResponse;
-import com.sopt.seminar.common.jwt.PrincipalHandler;
+import com.sopt.seminar.jwt.PrincipalHandler;
 import com.sopt.seminar.service.BlogService;
 import com.sopt.seminar.service.dto.BlogCreateRequset;
 import com.sopt.seminar.service.dto.BlogTitleUdateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

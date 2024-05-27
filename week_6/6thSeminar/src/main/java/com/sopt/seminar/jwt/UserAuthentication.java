@@ -1,4 +1,4 @@
-package com.sopt.seminar.common.jwt;
+package com.sopt.seminar.jwt;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
