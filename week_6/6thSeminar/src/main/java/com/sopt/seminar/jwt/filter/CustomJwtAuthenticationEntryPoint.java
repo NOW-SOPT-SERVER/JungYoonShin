@@ -21,16 +21,16 @@ public class CustomJwtAuthenticationEntryPoint implements AuthenticationEntryPoi
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-//        setResponse(response);
+        setResponse(response);
     }
 
-//    private void setResponse(HttpServletResponse response) throws IOException {
-//        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-//        response.setCharacterEncoding("UTF-8");
-//        response.getWriter()
-//                .write(objectMapper.writeValueAsString(
-//                        ErrorResponse.of(ErrorMessage.JWT_UNAUTHORIZED_EXCEPTION.getStatus(),
-//                                ErrorMessage.JWT_UNAUTHORIZED_EXCEPTION.getMessage())));
-//    }
+    private void setResponse(HttpServletResponse response) throws IOException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter()
+                .write(objectMapper.writeValueAsString(
+                        ErrorResponse.of(ErrorMessage.JWT_UNAUTHORIZED_EXCEPTION.getStatus(),
+                                ErrorMessage.JWT_UNAUTHORIZED_EXCEPTION.getMessage())));
+    }
 }

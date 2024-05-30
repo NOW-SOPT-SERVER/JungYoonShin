@@ -1,4 +1,4 @@
-package com.sopt.seminar.jwt;
+package com.sopt.seminar.jwt.handler;
 
 import com.sopt.seminar.common.dto.ErrorMessage;
 import com.sopt.seminar.exception.UnauthorizedException;

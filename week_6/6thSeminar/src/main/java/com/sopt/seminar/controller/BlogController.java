@@ -1,7 +1,7 @@
 package com.sopt.seminar.controller;
 
 
-import com.sopt.seminar.jwt.PrincipalHandler;
+import com.sopt.seminar.jwt.handler.PrincipalHandler;
 import com.sopt.seminar.service.BlogService;
 import com.sopt.seminar.service.dto.BlogCreateRequset;
 import com.sopt.seminar.service.dto.BlogTitleUdateRequest;

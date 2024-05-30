@@ -15,10 +15,14 @@ public class Member {
 
     private String name;
 
+    private String email;
+
     @Enumerated(EnumType.STRING)
     private Part part;
 
     private int age;
+
+    private String password;
 
     @Builder
     private Member(String name, Part part, int age) {

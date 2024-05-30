@@ -1,4 +1,4 @@
-package com.sopt.seminar.jwt.filter;
+package com.sopt.seminar.jwt.handler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

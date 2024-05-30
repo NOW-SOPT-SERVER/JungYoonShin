@@ -1,6 +1,6 @@
 package com.sopt.seminar.jwt;
 
-import com.sopt.seminar.jwt.filter.CustomAccessDeniedHandler;
+import com.sopt.seminar.jwt.handler.CustomAccessDeniedHandler;
 import com.sopt.seminar.jwt.filter.CustomJwtAuthenticationEntryPoint;
 import com.sopt.seminar.jwt.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
