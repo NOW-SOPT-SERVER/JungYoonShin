@@ -27,9 +27,9 @@ public class BlogService {
 
 
     @Transactional
-    public String create(Long memberId, BlogCreateRequset createRequest) {
+    public String create(String email, BlogCreateRequset createRequest) {
         //member찾기
-        Member member = memberService.findById(memberId);
+        Member member = memberService.findMember(email);
         try {
             Blog blog = blogRepository.save(Blog.create(member, createRequest.title(), createRequest.description(),
                     s3Service.uploadImage(BLOG_S3_UPLOAD_FOLER, createRequest.image())));

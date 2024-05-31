@@ -10,10 +10,10 @@ public class PrincipalHandler {
 
     private static final String ANONYMOUS_USER = "anonymousUser";
 
-    public Long getUserIdFromPrincipal() {
+    public String getUserIdFromPrincipal() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         isPrincipalNull(principal);
-        return Long.valueOf(principal.toString());
+        return principal.toString();
     }
 
     public void isPrincipalNull(

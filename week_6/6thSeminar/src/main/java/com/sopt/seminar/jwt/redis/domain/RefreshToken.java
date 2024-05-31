@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.index.Indexed;
 @Builder
 @Getter
 @AllArgsConstructor
-public class Token {
+public class RefreshToken {
 
     @Id
     private Long id;
@@ -19,11 +19,11 @@ public class Token {
     @Indexed
     private String refreshToken;
 
-    public static Token of(
+    public static RefreshToken of(
             final Long id,
             final String refreshToken
     ) {
-        return Token.builder()
+        return RefreshToken.builder()
                 .id(id)
                 .refreshToken(refreshToken)
                 .build();

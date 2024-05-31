@@ -2,14 +2,13 @@ package com.sopt.seminar.service.dto;
 
 public record UserJoinResponse(
         String accessToken,
-        String userId
+        String refreshToken
 ) {
 
     public static UserJoinResponse of(
             String accessToken,
-            String refreshToken,
-            String userId,
+            String refreshToken
     ) {
-        return new UserJoinResponse(accessToken, refreshToken, userId);
+        return new UserJoinResponse(accessToken, refreshToken);
     }
 }

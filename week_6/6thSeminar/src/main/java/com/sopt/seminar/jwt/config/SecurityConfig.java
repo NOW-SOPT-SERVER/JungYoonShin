@@ -1,20 +1,23 @@
-package com.sopt.seminar.jwt;
+package com.sopt.seminar.jwt.config;
 
 import com.sopt.seminar.jwt.handler.CustomAccessDeniedHandler;
 import com.sopt.seminar.jwt.filter.CustomJwtAuthenticationEntryPoint;
 import com.sopt.seminar.jwt.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.RequestCacheConfigurer;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 @EnableWebSecurity //web Security를 사용할 수 있게
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -22,7 +25,7 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
 
-    private static final String[] AUTH_WHITE_LIST = {"/api/v1/members"};
+    private static final String[] AUTH_WHITE_LIST = {"/api/v1/members", "/"};
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,7 +38,6 @@ public class SecurityConfig {
                     exception.authenticationEntryPoint(customJwtAuthenticationEntryPoint);
                     exception.accessDeniedHandler(customAccessDeniedHandler);
                 });
-
 
         http.authorizeHttpRequests(auth -> {
                     auth.requestMatchers(AUTH_WHITE_LIST).permitAll();

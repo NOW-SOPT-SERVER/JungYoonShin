@@ -5,6 +5,7 @@ import com.sopt.seminar.global.ApiResponse;
 import com.sopt.seminar.global.ApiUtils;
 import com.sopt.seminar.service.MemberService;
 import com.sopt.seminar.service.dto.MemberCreateRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,10 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity<UserJoinResponse> postMember(
-            @RequestBody MemberCreateRequest memberCreate
+            @RequestBody @Valid MemberCreateRequest memberCreate
     ) {
         UserJoinResponse userJoinResponse = memberService.createMember(memberCreate);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .header("Location", userJoinResponse.userId())
                 .body(
                         userJoinResponse
                 );

@@ -33,8 +33,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             final String token = getJwtFromRequest(request);
             if (jwtTokenProvider.validateToken(token) == VALID_JWT) {
-                Long memberId = jwtTokenProvider.getUserFromJwt(token);
-                UserAuthentication authentication = UserAuthentication.createUserAuthentication(memberId);
+                String email = jwtTokenProvider.getUserFromJwt(token);
+                UserAuthentication authentication = UserAuthentication.createUserAuthentication(email);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));  //인증 부가 정보
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

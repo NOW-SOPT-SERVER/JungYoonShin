@@ -15,7 +15,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtTokenProvider {
 
-    private static final String USER_ID = "userId";
+    private static final String EMAIL = "email";
 
     private static final Long ACCESS_TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000L * 7;
     private static final Long REFRESH_TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000L * 14;
@@ -23,12 +23,11 @@ public class JwtTokenProvider {
     @Value("${jwt.secret}")
     private String JWT_SECRET;
 
-    public String issueAccessToken(final Authentication authentication) {
-        return generateToken(authentication, ACCESS_TOKEN_EXPIRATION_TIME);
-    }
-
-    public String issueRefreshToken(final Authentication authentication) {
-        return generateToken(authentication, REFRESH_TOKEN_EXPIRATION_TIME);
+    public TokenInfo issueToken(final Authentication authentication) {
+        return TokenInfo.of(
+                generateToken(authentication, ACCESS_TOKEN_EXPIRATION_TIME),
+                generateToken(authentication, REFRESH_TOKEN_EXPIRATION_TIME)
+        );
     }
 
     public String generateToken(Authentication authentication, Long tokenExpirationTime) {
@@ -37,7 +36,7 @@ public class JwtTokenProvider {
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + tokenExpirationTime));      // 만료 시간
 
-        claims.put(USER_ID, authentication.getPrincipal());
+        claims.put(EMAIL, authentication.getPrincipal());
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE) // Header
@@ -74,8 +73,8 @@ public class JwtTokenProvider {
                 .getBody();
     }
 
-    public Long getUserFromJwt(String token) {
+    public String getUserFromJwt(String token) {
         Claims claims = getBody(token);
-        return Long.valueOf(claims.get(USER_ID).toString());
+        return claims.get(EMAIL).toString();
     }
 }
