@@ -1,5 +1,7 @@
 package com.sopt.seminar.jwt;
 
+import com.sopt.seminar.common.dto.ErrorMessage;
+import com.sopt.seminar.exception.UnauthorizedException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
@@ -72,6 +74,13 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
+    public void matchRefreshToken(String refreshToken, String storedRefreshToken) {
+        if (!refreshToken.equals(storedRefreshToken)) {
+            throw new UnauthorizedException(ErrorMessage.MISMATCH_REFRESH_TOKEN);
+        }
+    }
+
 
     public String getUserFromJwt(String token) {
         Claims claims = getBody(token);

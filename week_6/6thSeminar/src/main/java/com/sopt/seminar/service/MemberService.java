@@ -1,6 +1,7 @@
 package com.sopt.seminar.service;
 
 import com.sopt.seminar.common.dto.ErrorMessage;
+import com.sopt.seminar.exception.UnauthorizedException;
 import com.sopt.seminar.jwt.JwtTokenProvider;
 import com.sopt.seminar.jwt.TokenInfo;
 import com.sopt.seminar.jwt.UserAuthentication;
@@ -43,10 +44,22 @@ public class MemberService {
         UserAuthentication userAuthentication = UserAuthentication.createUserAuthentication(memberCreate.email());
         TokenInfo token = issueTokenAndStoreRefreshToken(userAuthentication, member.getId());
 
-        return UserJoinResponse.of(
-                token.accessToken(),
-                token.refreshToken()
-        );
+        return UserJoinResponse.of(token.accessToken(), token.refreshToken());
+    }
+
+    public TokenInfo reissue(String refreshToken) {
+        jwtTokenProvider.validateToken(refreshToken);
+        String userEmail = jwtTokenProvider.getUserFromJwt(refreshToken);
+        System.out.println("userEmail = " + userEmail);
+        Member member = findMember(userEmail);
+
+        //리프레시 토큰 탈취여부 확인(탈취범이 정상 유저보다 먼저 재발급 받았을 경우 -> 재로그인 유도)
+        jwtTokenProvider.matchRefreshToken(refreshToken, findRefreshToken(member.getId()).getRefreshToken());
+
+        UserAuthentication userAuthentication = UserAuthentication.createUserAuthentication(userEmail);
+        TokenInfo token = issueTokenAndStoreRefreshToken(userAuthentication, member.getId());
+
+        return token;
     }
 
     public MemberDetailResponse findMemberById(Long memberId) {
@@ -79,6 +92,11 @@ public class MemberService {
     public Member findMember(String email) {
         return memberRepository.findByEmail(email)
                 .orElseThrow(()-> new NotFoundException(ErrorMessage.MEMBER_NOT_FOUND));
+    }
+
+    private RefreshToken findRefreshToken(Long userId) {
+        return refreshTokenRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.EXPIRED_REFRESH_TOKEN));
     }
 
     private TokenInfo issueTokenAndStoreRefreshToken(Authentication authentication, Long userId) {

@@ -1,5 +1,6 @@
 package com.sopt.seminar.controller;
 
+import com.sopt.seminar.jwt.TokenInfo;
 import com.sopt.seminar.service.dto.UserJoinResponse;
 import com.sopt.seminar.global.ApiResponse;
 import com.sopt.seminar.global.ApiUtils;
@@ -13,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/members")  //v1은 버전관리할 때 이렇게 쓰곤 함
+@RequestMapping("/api/v1")  //v1은 버전관리할 때 이렇게 쓰곤 함
 public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping
+    @PostMapping("/members")
     public ResponseEntity<UserJoinResponse> postMember(
             @RequestBody @Valid MemberCreateRequest memberCreate
     ) {
@@ -27,6 +28,11 @@ public class MemberController {
                 .body(
                         userJoinResponse
                 );
+    }
+
+    @GetMapping("/members/reissue")
+    public ResponseEntity<TokenInfo> reissue(@RequestHeader String refreshToken) {
+        return ResponseEntity.ok(memberService.reissue(refreshToken));
     }
 
     @GetMapping("/{memberId}")
